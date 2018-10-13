@@ -1,96 +1,75 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang='en'>
 
-        <title>Laravel</title>
+<head>
+    <title>Project 2 for Fall semester</title>
+    <meta charset='utf-8'>
+    <link href='/styles/app.css' rel='stylesheet'>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+</head>
+<body>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
+<h1>Word Counter</h1>
+
+<div>
+    <p>Word counter is a small app that calculates the number of words/characters for your input.</p>
+    <form method='POST' action='count.php' id='word_count'>
+        <label>Write down sentences (do not enter line break!)</label>
+        <br>
+        <textarea form='word_count'
+                  name='textarea'
+                  rows="3" cols="40"
+                  placeholder='Type in your text here...'
+                  rows=5><?php if (isset($textarea_cache)) echo $textarea_cache; ?></textarea>
+        <br><br>
+
+
+        <input type='checkbox'
+               name='countSpace'
+        <?php
+            if (isset($countSpace_cache) && $countSpace_cache == true) {
+                echo "checked";
+            } else {
+                echo "";
             }
+            ?>>
+        <label>Count space character</label>
+        <br><br>
 
-            .full-height {
-                height: 100vh;
-            }
+        <label>Count by character or word </label>
+        <select name='wordOrChar' form='word_count'>
+            <option value='character'
+            <?php
+                if (isset($wordOrChar_cache) && $wordOrChar_cache == 'character') {
+                    echo "selected";
+                } else {
+                    echo "";
+                }
+                ?>>Character
+            </option>
+            <option value='word'
+            <?php
+                if (isset($wordOrChar_cache) && $wordOrChar_cache == 'word') {
+                    echo "selected";
+                } else {
+                    echo "";
+                }
+                ?>>Word
+            </option>
+        </select>
+        <br><br><br>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        <fieldset>
+            <legend>Count result</legend>
+            <br>
+            <output><?php if (isset($countResult_cache)) echo $countResult_cache; ?></output>
+        </fieldset>
 
-            .position-ref {
-                position: relative;
-            }
+        <br><br>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        <input type='submit' value='Count!'>
+    </form>
+</div>
 
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
+</body>
 </html>

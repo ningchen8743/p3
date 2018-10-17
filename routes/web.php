@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController');
+Route::get('/text-area','WordController@textArea');
+Route::get('count-result','WordController@countResult');

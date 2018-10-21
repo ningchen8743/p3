@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class WordController extends Controller
 {
     public function textArea(){
-        return 'Show the criteria and the text area';
+        return view('word.textarea');
     }
 
     public function countResult(){

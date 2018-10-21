@@ -3,7 +3,7 @@
 + Production URL: [link](http://p3.ningchenbunny.com)
 
 ## Outside resources
-N/A
+1. The FreeLogoServices: [link](https://www.freelogoservices.com/home-return)
 
 ## 3 Unique inputs
 1. Text input a sentence or a paragraph

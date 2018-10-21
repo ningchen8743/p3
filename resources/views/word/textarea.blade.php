@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang='en'>
+@extends('layouts.master')
 
-<head>
-    <title>Project 3 for Fall semester</title>
-    <meta charset='utf-8'>
-    <link href='/styles/app.css' rel='stylesheet'>
+@section('content')
 
-</head>
-<body>
 <form method='POST' action='count.php' id='word_count'>
     <label>Write down sentences (do not enter line break!)</label>
     <br>
@@ -65,5 +59,4 @@
     <input type='submit' value='Count!'>
 </form>
 
-</body>
-</html>
+@endsection

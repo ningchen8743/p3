@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang='en'>
+@extends('layouts.master')
 
-<head>
-    <title>Project 3 for Fall semester</title>
-    <meta charset='utf-8'>
-    <link href='/styles/app.css' rel='stylesheet'>
-
-</head>
-<body>
-
-<h1>Word Counter</h1>
+@section('content')
 
 <p>Word counter is a small app that calculates the number of words/characters for your input.</p>
 
-</body>
-</html>
+<form action="/text-area">
+    <input type="submit" value="Get Started!" />
+</form>
+
+@endsection

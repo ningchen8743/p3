@@ -10,7 +10,7 @@
 <body>
 
 <header>
-    <a href='/'><img src='/images/wordcounter.png' id='logo' alt='WordCounter Logo'></a>
+    <a href='/'><img src='/images/WordCounter.png' id='logo' alt='WordCounter Logo'></a>
 </header>
 
 <section>

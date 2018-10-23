@@ -9,41 +9,38 @@
               name='textarea'
               rows="3" cols="40"
               placeholder='Type in your text here...'
-              rows=5><?php if (isset($textarea_cache)) echo $textarea_cache; ?></textarea>
+              rows=5> @if (isset($textarea_cache)) {{$textarea_cache}} @endif </textarea>
     <br><br>
 
 
     <input type='checkbox'
            name='countSpace'
-    <?php
-        if (isset($countSpace_cache) && $countSpace_cache == true) {
-            echo "checked";
-        } else {
-            echo "";
-        }
-        ?>>
+        @if (isset($countSpace_cache) && $countSpace_cache == true)
+            {{"checked"}}
+        @else
+            {{""}}
+        @endif
+        >
     <label>Count space character</label>
     <br><br>
 
     <label>Count by character or word </label>
     <select name='wordOrChar' form='word_count'>
         <option value='character'
-        <?php
-            if (isset($wordOrChar_cache) && $wordOrChar_cache == 'character') {
-                echo "selected";
-            } else {
-                echo "";
-            }
-            ?>>Character
+            @if (isset($wordOrChar_cache) && $wordOrChar_cache == 'character')
+                {{"selected"}}
+            @else
+                {{""}}
+            @endif
+            >Character
         </option>
         <option value='word'
-        <?php
-            if (isset($wordOrChar_cache) && $wordOrChar_cache == 'word') {
-                echo "selected";
-            } else {
-                echo "";
-            }
-            ?>>Word
+            @if (isset($wordOrChar_cache) && $wordOrChar_cache == 'word')
+                {{"selected"}}
+            @else
+                {{""}}
+            @endif
+            >Word
         </option>
     </select>
     <br><br><br>
@@ -51,7 +48,7 @@
     <fieldset>
         <legend>Count result</legend>
         <br>
-        <output><?php if (isset($countResult_cache)) echo $countResult_cache; ?></output>
+        <output> @if (isset($countResult_cache)) {{$countResult_cache}} @endif </output>
     </fieldset>
 
     <br><br>

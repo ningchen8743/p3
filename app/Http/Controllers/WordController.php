@@ -11,6 +11,6 @@ class WordController extends Controller
     }
 
     public function countResult(){
-        return 'Show the count result and redirect user back to the textArea page';
+        return view('word.countresult');
     }
 }

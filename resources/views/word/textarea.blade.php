@@ -2,24 +2,20 @@
 
 @section('content')
 
-<form method='POST' action='count.php' id='word_count'>
+<form method='GET' action='/count-process' id='word_count'>
     <label>Write down sentences (do not enter line break!)</label>
     <br>
     <textarea form='word_count'
               name='textarea'
               rows="3" cols="40"
               placeholder='Type in your text here...'
-              rows=5> @if (isset($textarea_cache)) {{$textarea_cache}} @endif </textarea>
+              rows=5 value='{{$text}}'></textarea>
     <br><br>
 
 
     <input type='checkbox'
            name='countSpace'
-        @if (isset($countSpace_cache) && $countSpace_cache == true)
-            {{"checked"}}
-        @else
-            {{""}}
-        @endif
+        {{($countSpace) ? 'checked' : ''}}
         >
     <label>Count space character</label>
     <br><br>

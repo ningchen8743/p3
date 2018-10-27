@@ -13,4 +13,6 @@
 
 Route::get('/', 'WelcomeController');
 Route::get('/text-area','WordController@textArea');
-Route::get('/count-result','WordController@countResult');
+Route::get('/count-process','WordController@countProcess');
+Route::view('/about','about');
+Route::view('/contact', 'contact');

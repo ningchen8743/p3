@@ -1,0 +1,14 @@
+@extends('layouts.master')
+
+@section('content')
+
+<ul>
+    <li>@include('modules.description')</li>
+    <li>This app was created as a prove of concept for CSCI E-15 Dynamic Web Application.</li>
+    <li>Line break is prohibited when typing in words/characters into the text box. A warning note is left besides the text box.</li>
+    <li>The source code of the app can be found here:
+    <a href='https://github.com/ningchen8743/p3'>View on Github</a>
+    </li>
+</ul>
+
+@endsection

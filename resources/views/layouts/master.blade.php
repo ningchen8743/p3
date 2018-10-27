@@ -11,6 +11,7 @@
 
 <header>
     <a href='/'><img src='/images/WordCounter.png' id='logo' alt='WordCounter Logo'></a>
+    @include('modules.nav')
 </header>
 
 <section>

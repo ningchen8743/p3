@@ -12,6 +12,11 @@ return [
     | any other location as required by the application or its packages.
     |
     */
+    'nav' => [
+        '/about' => 'About',
+        '/text-area' => 'Word Counter',
+        '/contact' => 'Contact',
+    ],
 
     'name' => 'Word Counter',
 

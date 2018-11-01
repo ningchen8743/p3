@@ -14,7 +14,7 @@ return [
     */
     'nav' => [
         '/about' => 'About',
-        '/text-area' => 'Word Counter',
+        '/count-word' => 'Word Counter',
         '/contact' => 'Contact',
     ],
 

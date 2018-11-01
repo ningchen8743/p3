@@ -9,6 +9,7 @@
     <li>The source code of the app can be found here:
     <a href='https://github.com/ningchen8743/p3'>View on Github</a>
     </li>
+    <li>Logo design credit: <a href='https://www.freelogoservices.com/home-return'>The FreeLogoServices</a></li>
 </ul>
 
 @endsection

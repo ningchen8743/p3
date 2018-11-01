@@ -44,7 +44,7 @@
     <fieldset>
         <legend>Count result</legend>
         <br>
-        <output> @if (isset($countResult_cache)) {{$countResult_cache}} @endif </output>
+        <output> {{$countResult}} </output>
     </fieldset>
 
     <br><br>

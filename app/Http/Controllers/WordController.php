@@ -11,7 +11,7 @@ class WordController extends Controller
         return view('word.textarea')->with([
             'text' => $request->session()->get('text', ''),
             'countSpace' => $request->session()->get('countSpace', false),
-            'wordOrChar' => $request->session()->get('wordOrChar', false),
+            //'wordOrChar' => $request->session()->get('wordOrChar', false),
             'countResult' => $request->session()->get('countResult', ''),
         ]);
     }
@@ -22,6 +22,7 @@ class WordController extends Controller
         $charCount = 0;
         $spaceCount = 0;
         $wordCount = 0;
+        $wordOrChar = '';
 
         $text = $request->input('text', null);
 
@@ -42,24 +43,27 @@ class WordController extends Controller
                 }
             }
         }
-            // get result
-            if ($request->has('countSpace')) {
-                if ($wordOrChar == 'word') {
-                    $countResult = $wordCount + $spaceCount;
-                } else {
-                    $countResult = $charCount;
-                }
+        // get result
+        if ($request->has('countSpace')) {
+            if ($wordOrChar == 'word') {
+                $countResult = $wordCount + $spaceCount;
             } else {
-                if ($wordOrChar == 'word') {
-                    $countResult = $wordCount;
-                } else {
-                    $countResult = $charCount - $spaceCount;
-                }
+                $countResult = $charCount;
             }
+        } else {
+            if ($wordOrChar == 'word') {
+                $countResult = $wordCount;
+            } else {
+                $countResult = $charCount - $spaceCount;
+            }
+        }
+
         return redirect('/text-area')->with([
             'text' => $text,
             'countSpace' => $request->has('countSpace'),
-            'countResult' => $countResult,
+            'countResult' => $countResult
+            //'$wordOrChar' => $request->,
         ]);
+
     }
 }

@@ -16,3 +16,5 @@ Route::get('/text-area','WordController@textArea');
 Route::get('/count-process','WordController@countProcess');
 Route::view('/about','about');
 Route::view('/contact', 'contact');
+Route::get('/404',['as'=>'404','uses'=>'ErrorHandlerController@abort']);
+

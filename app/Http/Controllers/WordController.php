@@ -18,13 +18,17 @@ class WordController extends Controller
 
     public function countWord(Request $request)
     {
+        $request->validate([
+            'textarea' => 'required|regex:/^[a-zA-Z ]+$/'
+        ]);
+
         $countResult = 0;
         $charCount = 0;
         $spaceCount = 0;
         $wordCount = 0;
 
         $text = $request->input('textarea', null);
-		
+
 		$countSpace = false;
 		if($request->has('countSpace'))
 		{
@@ -32,14 +36,8 @@ class WordController extends Controller
 		}
 		
 		$wordOrChar = $request->input('wordOrChar', 'word');		
-		
-		$charArray = str_split($text);
-		foreach ($charArray as $char) 
-		{
-			++$countResult;
-		}		
-			
-        if ($text) 
+
+        if ($text)
 		{
             // perform calculation
             $charArray = str_split($text);
@@ -83,11 +81,16 @@ class WordController extends Controller
             }
         }
 
-		$request->session()->put('text_cache', $text);
-		$request->session()->put('countSpace_cache', $countSpace);
-		$request->session()->put('wordOrChar_cache', $wordOrChar);
-		$request->session()->put('countResult_cache', $countResult);
-		
-        return redirect('/count-word');
+		//$request->session()->put('text_cache', $text);
+		//$request->session()->put('countSpace_cache', $countSpace);
+		//$request->session()->put('wordOrChar_cache', $wordOrChar);
+		//$request->session()->put('countResult_cache', $countResult);
+
+        return redirect('/count-word')->with([
+            'text_cache' => $text,
+            'countSpace_cache' => $countSpace,
+            'wordOrChar_cache' => $wordOrChar,
+            'countResult_cache' => $countResult
+        ]);
     }
 }

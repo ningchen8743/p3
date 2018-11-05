@@ -5,18 +5,25 @@
 <form method='GET' action='/count-word-calculate' id='word_count'>
     <label>Write down sentences (do not enter line break!)</label>
     <br>
-    <textarea form='word_count'
-              name='textarea'
-              rows="3" cols="40"
-              placeholder='Type in your text here...'
-              rows=5>{{ $text }}</textarea>
-    <br><br>
+    @if($errors->any())
+        <textarea form='word_count'
+                  name='textarea'
+                  rows="3" cols="40"
+                  placeholder='Type in your text here...'
+                  rows=5>{{ old('textarea') }}</textarea>
+        <br><br>
+            <div class='error'>{{ $errors->first('textarea') }}</div>
+    @else
+        <textarea form='word_count'
+                  name='textarea'
+                  rows="3" cols="40"
+                  placeholder='Type in your text here...'
+                  rows=5>{{ $text }}</textarea>
+        <br><br>
+    @endif
 
-	@if (isset($countSpace) && $countSpace == true)
-		<input type='checkbox' name='countSpace' checked>
-	@else
-		<input type='checkbox' name='countSpace'>
-	@endif
+
+	<input type='checkbox' name='countSpace' {{ ($countSpace) ? 'checked' : '' }}>
 	<label>Count space character</label>
 	<br><br>
 		

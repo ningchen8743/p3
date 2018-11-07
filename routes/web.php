@@ -12,9 +12,9 @@
 */
 
 Route::get('/', 'WelcomeController');
-Route::get('/count-word','WordController@initializeView');
-Route::get('/count-word-calculate','WordController@countWord');
-Route::view('/about','about');
+Route::get('/count-word', 'WordController@initializeView');
+Route::get('/count-word-calculate', 'WordController@countWord');
+Route::view('/about', 'about');
 Route::view('/contact', 'contact');
-Route::get('/404',['as'=>'404','uses'=>'ErrorHandlerController@abort']);
+Route::get('/404', ['as' => '404', 'uses' => 'ErrorHandlerController@abort']);
 

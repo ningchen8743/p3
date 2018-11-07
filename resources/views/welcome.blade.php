@@ -2,6 +2,6 @@
 
 @section('content')
 
-@include('modules.description')
+    @include('modules.description')
 
 @endsection

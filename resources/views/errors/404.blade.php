@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Sorry, Page Not Found 404</h1>
-<a href="{{ asset('/') }}">back to home page</a>
+    <h2>404 error. Sorry! Page Not Found.</h2>
+    <a href="{{ asset('/') }}">Back to home page</a>
 
 @endsection

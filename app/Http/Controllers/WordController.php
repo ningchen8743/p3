@@ -10,17 +10,17 @@ class WordController extends Controller
 {
     public function initializeView(Request $request)
     {
-        $text        = $request->session()->get('text'        , ''        );
-        $countSpace  = $request->session()->get('countSpace'  , false     );
-        $wordOrChar  = $request->session()->get('wordOrChar'  , 'word'    );
-        $countResult = $request->session()->get('countResult' , ''        );
-        $errMsg      = $request->session()->get('errMsg'      , ''        );
+        $text = $request->session()->get('text', '');
+        $countSpace = $request->session()->get('countSpace', false);
+        $wordOrChar = $request->session()->get('wordOrChar', 'word');
+        $countResult = $request->session()->get('countResult', '');
+        $errMsg = $request->session()->get('errMsg', '');
 
-        return view('word.count-word')->with(['text'        => $text,
-                                              'countSpace'  => $countSpace,
-                                              'wordOrChar'  => $wordOrChar,
-                                              'countResult' => $countResult,
-                                              'errMsg'      => $errMsg]);
+        return view('word.count-word')->with(['text' => $text,
+            'countSpace' => $countSpace,
+            'wordOrChar' => $wordOrChar,
+            'countResult' => $countResult,
+            'errMsg' => $errMsg]);
     }
 
     public function countWord(Request $request)
@@ -38,8 +38,7 @@ class WordController extends Controller
 
         // get user input 2
         $countSpace = false;
-        if($request->has('countSpace'))
-        {
+        if ($request->has('countSpace')) {
             $countSpace = true;
         }
 
@@ -50,12 +49,9 @@ class WordController extends Controller
         $countResult = '';
         $errMsg = '';
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             $errMsg = $validator->errors()->first('textarea');
-        }
-        else
-        {
+        } else {
             $countResult = 0;
             $charCount = 0;
             $spaceCount = 0;
@@ -64,50 +60,40 @@ class WordController extends Controller
             // perform calculation
             $charArray = str_split($text);
             $charCount = count($charArray);
-            foreach ($charArray as $char)
-            {
-                if ($char == ' ')
-                {
+            foreach ($charArray as $char) {
+                if ($char == ' ') {
                     ++$spaceCount;
                 }
             }
 
             $wordArray = explode(" ", $text);
-            foreach ($wordArray as $word)
-            {
-                if ($word != '')
-                {
+            foreach ($wordArray as $word) {
+                if ($word != '') {
                     ++$wordCount;
                 }
             }
 
             // get result
-            if ($countSpace)
-            {
-                if ($wordOrChar == 'word')
-                {
+            if ($countSpace) {
+                if ($wordOrChar == 'word') {
                     $countResult = $wordCount + $spaceCount;
-                } else
-                {
+                } else {
                     $countResult = $charCount;
                 }
-            } else
-            {
-                if ($wordOrChar == 'word')
-                {
+            } else {
+                if ($wordOrChar == 'word') {
                     $countResult = $wordCount;
-                } else
-                {
+                } else {
                     $countResult = $charCount - $spaceCount;
                 }
             }
         }
 
-        $request->session()->flash('text'        , $text        );
-        $request->session()->flash('countSpace'  , $countSpace  );
-        $request->session()->flash('wordOrChar'  , $wordOrChar  );
-        $request->session()->flash('countResult' , $countResult );
-        $request->session()->flash('errMsg'      , $errMsg      );
+        $request->session()->flash('text', $text);
+        $request->session()->flash('countSpace', $countSpace);
+        $request->session()->flash('wordOrChar', $wordOrChar);
+        $request->session()->flash('countResult', $countResult);
+        $request->session()->flash('errMsg', $errMsg);
 
         return redirect('/count-word');
     }

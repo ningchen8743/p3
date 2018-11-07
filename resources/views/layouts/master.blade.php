@@ -12,10 +12,9 @@
 
     <header>
         <a href='/'><img src='/images/WordCounter.png' id='logo' alt='WordCounter Logo'></a>
-        <nav class="nav">
         @include('modules.nav')
-        </nav>
     </header>
+    <br>
 
     <section>
         @yield('content')

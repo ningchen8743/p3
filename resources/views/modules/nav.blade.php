@@ -1,7 +1,7 @@
-<nav>
-    <ul>
+<nav id='customNav'>
+    <ul id='horizontalNavUL'>
         @foreach(config('app.nav') as $link => $label)
-            <li>
+            <li class='horizontalNavItem'>>
                 @if(Request::is(substr($link, 1)))
                     {{ $label }}
                 @else

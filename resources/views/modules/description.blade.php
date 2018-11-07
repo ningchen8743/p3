@@ -1,1 +1,1 @@
-Word counter is a small app that calculates the number of words/characters for your input.
+<h1>Word counter is a small app that calculates the number of words/characters for your input.</h1>

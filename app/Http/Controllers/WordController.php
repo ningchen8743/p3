@@ -4,93 +4,111 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Validator;
+
 class WordController extends Controller
 {
     public function initializeView(Request $request)
     {
-        return view('word.count-word')->with([
-            'text' => $request->session()->get('text_cache', ''),
-            'countSpace' => $request->session()->get('countSpace_cache', false),
-            'wordOrChar' => $request->session()->get('wordOrChar_cache', 'word'),
-            'countResult' => $request->session()->get('countResult_cache', ''),
-        ]);
+        $text        = $request->session()->get('text'        , ''        );
+        $countSpace  = $request->session()->get('countSpace'  , false     );
+        $wordOrChar  = $request->session()->get('wordOrChar'  , 'word'    );
+        $countResult = $request->session()->get('countResult' , ''        );
+        $errMsg      = $request->session()->get('errMsg'      , ''        );
+
+        return view('word.count-word')->with(['text'        => $text,
+                                              'countSpace'  => $countSpace,
+                                              'wordOrChar'  => $wordOrChar,
+                                              'countResult' => $countResult,
+                                              'errMsg'      => $errMsg]);
     }
 
     public function countWord(Request $request)
     {
-        $request->validate([
+        // use custom validator instead of the validate() function
+        // because it gives much much better control:
+        // when the validation fails, custom validator continues executing
+        // the subsequent code instead of skipping it, which is highly desired
+        $validator = Validator::make($request->all(), [
             'textarea' => 'required|regex:/^[a-zA-Z ]+$/'
         ]);
 
-        $countResult = 0;
-        $charCount = 0;
-        $spaceCount = 0;
-        $wordCount = 0;
+        // get user input 1
+        $text = $request->input('textarea');
 
-        $text = $request->input('textarea', null);
+        // get user input 2
+        $countSpace = false;
+        if($request->has('countSpace'))
+        {
+            $countSpace = true;
+        }
 
-		$countSpace = false;
-		if($request->has('countSpace'))
-		{
-			$countSpace = true;
-		}
-		
-		$wordOrChar = $request->input('wordOrChar', 'word');		
+        // get user input 3
+        $wordOrChar = $request->input('wordOrChar');
 
-        if ($text)
-		{
+        // initialize other data that will be returned
+        $countResult = '';
+        $errMsg = '';
+
+        if($validator->fails())
+        {
+            $errMsg = $validator->errors()->first('textarea');
+        }
+        else
+        {
+            $countResult = 0;
+            $charCount = 0;
+            $spaceCount = 0;
+            $wordCount = 0;
+
             // perform calculation
             $charArray = str_split($text);
             $charCount = count($charArray);
-            foreach ($charArray as $char) 
-			{
-                if ($char == ' ') 
-				{
+            foreach ($charArray as $char)
+            {
+                if ($char == ' ')
+                {
                     ++$spaceCount;
                 }
             }
 
             $wordArray = explode(" ", $text);
-            foreach ($wordArray as $word) 
-			{
-                if ($word != '') 
-				{
+            foreach ($wordArray as $word)
+            {
+                if ($word != '')
+                {
                     ++$wordCount;
                 }
             }
-        }
-		
-        // get result
-        if ($countSpace) 
-		{
-            if ($wordOrChar == 'word') 
-			{
-                $countResult = $wordCount + $spaceCount;
-            } else 
-			{
-                $countResult = $charCount;
-            }
-        } else 
-		{
-            if ($wordOrChar == 'word') 
-			{
-                $countResult = $wordCount;
-            } else 
-			{
-                $countResult = $charCount - $spaceCount;
+
+            // get result
+            if ($countSpace)
+            {
+                if ($wordOrChar == 'word')
+                {
+                    $countResult = $wordCount + $spaceCount;
+                } else
+                {
+                    $countResult = $charCount;
+                }
+            } else
+            {
+                if ($wordOrChar == 'word')
+                {
+                    $countResult = $wordCount;
+                } else
+                {
+                    $countResult = $charCount - $spaceCount;
+                }
             }
         }
 
-		//$request->session()->put('text_cache', $text);
-		//$request->session()->put('countSpace_cache', $countSpace);
-		//$request->session()->put('wordOrChar_cache', $wordOrChar);
-		//$request->session()->put('countResult_cache', $countResult);
+        $request->session()->flash('text'        , $text        );
+        $request->session()->flash('countSpace'  , $countSpace  );
+        $request->session()->flash('wordOrChar'  , $wordOrChar  );
+        $request->session()->flash('countResult' , $countResult );
+        $request->session()->flash('errMsg'      , $errMsg      );
 
-        return redirect('/count-word')->with([
-            'text_cache' => $text,
-            'countSpace_cache' => $countSpace,
-            'wordOrChar_cache' => $wordOrChar,
-            'countResult_cache' => $countResult
-        ]);
+        return redirect('/count-word');
     }
 }

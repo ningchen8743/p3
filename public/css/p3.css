@@ -115,11 +115,12 @@ a {
     text-decoration: none;
 }
 
+#horizontalNavUL a:visited {
+    color: white;
+}
+
 #horizontalNavUL a:hover {
     color: yellow;
-    font-weight: bold;
-    font-size: 15px;
-    text-decoration: none;
 }
 
 .horizontalNavItem {

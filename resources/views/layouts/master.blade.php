@@ -8,7 +8,6 @@
 </head>
 
 <div>
-    <body>
 
     <header>
         <a href='/'><img src='/images/WordCounter.png' id='logo' alt='WordCounter Logo'></a>
@@ -20,7 +19,6 @@
         @yield('content')
     </section>
 
-    </body>
 </div>
 
 </html>
